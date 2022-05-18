@@ -27,12 +27,10 @@
 					print("There was an error while reading your card!!");
 				});
 
-				ndef.addEventListener(
-					"reading",
-					({ message, serialNumber }) => {
-						print(`> Serial Number: ${serialNumber}`);
-					}
-				);
+				ndef.addEventListener("reading", (objective) => {
+					console.log(objective);
+					print(`> Serial Number: ${objective.serialNumber}`);
+				});
 			};
 			document.getElementById("scan").onclick = read;
 		</script>
