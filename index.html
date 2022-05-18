@@ -7,29 +7,40 @@
 		<button id="scan"></button>
 		<div class="Something">You've not got it</div>
 		<script>
-			let print = (s) => {
-				document.getElementsByClassName("Something")[0].innerHTML +=
-					"\n" + s;
-			};
+			const humans = [
+				{
+					serialNumber: "97:85:73:76",
+					name: "Naman Agrawal",
+					message: "What?",
+				},
+				{
+					serialNumber: "e7:65:96:76",
+					name: "Mhetre Ayush",
+					message: "What message?",
+				},
+				{
+					serialNumber: "21:f9:43:1c",
+					name: "Aksh Ranjan",
+					message: "Here's my message",
+				},
+			];
 
 			if (!("NDEFReader" in window)) {
-				print("Fuck off!!");
+				document.getElementsByClassName("Something")[0].innerHTML =
+					"No support for NFC!";
 			}
 			let read = async () => {
-				print("Fuckkkkk you off fu off");
-
-				const status = await navigator.permissions.query({
-					name: "nfc",
-				});
 				const ndef = new NDEFReader();
 				await ndef.scan();
 				ndef.addEventListener("readingerror", () => {
-					print("There was an error while reading your card!!");
+					document.getElementsByClassName("Something")[0].innerHTML =
+						"Error while reading your card";
 				});
 
 				ndef.addEventListener("reading", (objective) => {
 					console.log(objective);
-					print(`> Serial Number: ${objective.serialNumber}`);
+					document.getElementsByClassName("Something")[0].innerHTML =
+						humans.filter({ serialNumber: objective.serialNumber });
 				});
 			};
 			document.getElementById("scan").onclick = read;
