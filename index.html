@@ -19,6 +19,9 @@
 			}
 			let read = async () => {
 				print("Fuckkkkk off");
+				const status = await navigator.permissions.query({
+					name: "nfc",
+				});
 				const ndef = new NDEFReader();
 				await ndef.scan();
 				ndef.addEventListener("readingerror", () => {
