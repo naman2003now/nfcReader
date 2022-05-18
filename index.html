@@ -9,11 +9,9 @@
 	<body>
 		<div class="Something">You've not got it</div>
 		<script>
-			document.getElementsByClassName("Something")[0].innerHTML = "What";
-			const ndef = new NDEFReader();
-			if (ndef) {
+			if (!("NDEFReader" in window)) {
 				document.getElementsByClassName("Something")[0].innerHTML =
-					"Fuck off!!";
+					"Fuck OFFFFFF!!";
 			}
 		</script>
 	</body>
