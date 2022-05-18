@@ -7,6 +7,7 @@
 		<title>Document</title>
 	</head>
 	<body>
+		<button id="scan"></button>
 		<div class="Something">You've not got it</div>
 		<script>
 			let print = (s) => {
@@ -36,7 +37,7 @@
 					}
 				);
 			};
-			read();
+			document.getElementById("scan").onclick = read;
 		</script>
 	</body>
 </html>
