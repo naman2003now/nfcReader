@@ -9,10 +9,30 @@
 	<body>
 		<div class="Something">You've not got it</div>
 		<script>
+			let print = (s) => {
+				document.getElementsByClassName("Something")[0].innerHTML +=
+					"\n" + s;
+			};
+
 			if (!("NDEFReader" in window)) {
-				document.getElementsByClassName("Something")[0].innerHTML =
-					"Fuck OFFFFFF!!";
+				print("Fuck off!!");
 			}
+			let read = async () => {
+				print("Fuckkkkk off");
+				const ndef = new NDEFReader();
+				await ndef.scan();
+				ndef.addEventListener("readingerror", () => {
+					print("There was an error while reading your card!!");
+				});
+
+				ndef.addEventListener(
+					"reading",
+					({ message, serialNumber }) => {
+						print(`> Serial Number: ${serialNumber}`);
+					}
+				);
+			};
+			read();
 		</script>
 	</body>
 </html>
