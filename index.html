@@ -39,6 +39,8 @@
 
 				ndef.addEventListener("reading", (objective) => {
 					console.log(objective);
+					document.getElementsByClassName("Something")[0].innerHTML =
+						objective.serialNumber;
 					humans.forEach((human) => {
 						if (human.serialNumber == objective.serialNumber) {
 							document.getElementsByClassName(
