@@ -1,61 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Document</title>
-	</head>
-	<body>
-		<button id="scan"></button>
-		<div class="Something">Get your information with your ID</div>
-		<script>
-			const humans = [
-				{
-					serialNumber: "97:85:73:76",
-					name: "Naman Agrawal",
-					message: "What",
-				},
-				{
-					serialNumber: "e7:65:96:76",
-					name: "Mhetre Ayush",
-					message: "What message?",
-				},
-				{
-					serialNumber: "21:f9:43:1c",
-					name: "Aksh Ranjan",
-					message: "Here's my message",
-				},
-				{
-					serialNumber: "b7:cd:98:76",
-					name: "TechBox",
-					message: "TechBox is my old name!",
-				},
-			];
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="scan"></button>
+    <div class="Something">Get your information with your ID</div>
+    <script>
+      const humans = [
+        {
+          serialNumber: "97:85:73:76",
+          name: "Naman Agrawal",
+          message: "What",
+        },
+        {
+          serialNumber: "e7:65:96:76",
+          name: "Mhetre Ayush",
+          message: "What message?",
+        },
+        {
+          serialNumber: "21:f9:43:1c",
+          name: "Aksh Ranjan",
+          message: "Here's my message",
+        },
+        {
+          serialNumber: "b7:cd:98:76",
+          name: "TechBox",
+          message: "TechBox is my old name!",
+        },
+      ];
 
-			if (!("NDEFReader" in window)) {
-				document.getElementsByClassName("Something")[0].innerHTML =
-					"No support for NFC!";
-			}
-			let read = async () => {
-				const ndef = new NDEFReader();
-				await ndef.scan();
-				ndef.addEventListener("readingerror", () => {
-					document.getElementsByClassName("Something")[0].innerHTML =
-						"Error while reading your card";
-				});
+      if (!("NDEFReader" in window)) {
+        document.getElementsByClassName("Something")[0].innerHTML =
+          "No support for NFC!";
+      }
+      let read = async () => {
+        const ndef = new NDEFReader();
+        await ndef.scan();
+        ndef.addEventListener("readingerror", () => {
+          document.getElementsByClassName("Something")[0].innerHTML =
+            "Error while reading your card";
+        });
 
-				ndef.addEventListener("reading", (objective) => {
-					console.log(objective);
-					document.getElementsByClassName("Something")[0].innerHTML =
-						objective.serialNumber;
-					humans.forEach((human) => {
-						if (human.serialNumber == objective.serialNumber) {
-							document.getElementsByClassName(
-								"Something"
-							)[0].innerHTML = JSON.stringify(human);
-						}
-					});
-				});
-			};
-			document.getElementById("scan").onclick = read;
-		</script>
-	</body>
+        ndef.addEventListener("reading", (objective) => {
+          console.log(objective);
+          document.getElementsByClassName("Something")[0].innerHTML =
+            objective;
+        });
+      };
+      document.getElementById("scan").onclick = read;
+    </script>
+  </body>
 </html>
